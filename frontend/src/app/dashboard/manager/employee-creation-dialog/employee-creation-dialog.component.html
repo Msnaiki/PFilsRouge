@@ -1,0 +1,25 @@
+<mat-card>
+    <form (ngSubmit)=" onCreateEmployee()">
+      <mat-form-field appearance="fill">
+        <mat-label>Username</mat-label>
+        <input matInput [(ngModel)]="employeeData.username" name="username">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="employeeData.name" name="name">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput [(ngModel)]="employeeData.password" name="password" type="password">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Best Quality</mat-label>
+        <input matInput [(ngModel)]="employeeData.bestQuality" name="bestQuality">
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Create Employee</button>
+    </form>
+  </mat-card>

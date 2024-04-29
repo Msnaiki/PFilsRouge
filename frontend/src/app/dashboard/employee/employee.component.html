@@ -1,0 +1,47 @@
+<header>
+    <mat-toolbar color="primary" style="display: 
+    flex;justify-content:space-between ;">
+      <span>Tasky</span>
+      <nav mat-tab-nav-bar>
+        <span style="margin-right: 10px;font-size: 16px;">Hello, {{username}}</span>
+        <button mat-raised-button color="primary" (click)="openPassUpdateDialog()">Change Password</button>
+        <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+      </nav>
+    </mat-toolbar>
+  </header>
+  <br>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="myTaskSource" class="mat-elevation-z8">
+      <!-- Columns Definitions -->
+      <ng-container matColumnDef="taskId">
+        <th mat-header-cell *matHeaderCellDef>Task ID</th>
+        <td mat-cell *matCellDef="let task">{{ task.taskId }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let task">{{ task.description | slice:0:80}}{{ task.description.length > 80 ? '...' : '' }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let task">{{ task.status }}</td>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let task">
+          <mat-form-field>
+            <mat-label>Status</mat-label>
+            <mat-select [formControl]="statusControl" (selectionChange)="updateTaskStatus(task, $event.value)">
+              <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </ng-container>
+  
+      <!-- Row Definitions -->
+      <tr mat-header-row *matHeaderRowDef="['taskId', 'description', 'status', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['taskId', 'description', 'status', 'actions'];"></tr>
+    </table>
+  </div>

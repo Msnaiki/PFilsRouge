@@ -17,7 +17,7 @@ public class Employee extends User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long EmployeeId;
     private String bestQuality;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "manager_id")
     @JsonBackReference
     private Manager manager;

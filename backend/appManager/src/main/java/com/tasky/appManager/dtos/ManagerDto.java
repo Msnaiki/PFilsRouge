@@ -6,4 +6,5 @@ import lombok.Data;
 public class ManagerDto {
     private Long managerId;
     private String username;
+    private String name;
 }

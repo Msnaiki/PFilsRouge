@@ -38,8 +38,7 @@ public class CustomUserDetails implements UserDetails {
         return Collections.singletonList(new SimpleGrantedAuthority(this.role));
     }
 
-    // Implement other methods (getPassword, getUsername, etc.)
-    // ...
+
 
     @Override
     public boolean isAccountNonExpired() {

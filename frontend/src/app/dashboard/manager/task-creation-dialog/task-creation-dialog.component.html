@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Create New Task</h1>
+<div mat-dialog-content>
+  <form (ngSubmit)="onCreateTask()"> 
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="taskData.title" name="title" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput [(ngModel)]="taskData.description" name="description" required></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Assign to Employee</mat-label>
+      <mat-select [(ngModel)]="taskData.assignedTo" name="assignedTo">
+        <mat-option *ngFor="let employee of employees" [value]="employee">
+          {{ employee.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button mat-button (click)="dialogRef.close()">Cancel</button>
+      <button mat-button color="primary" type="submit">Create Task</button>
+    </div>
+  </form>
+</div>

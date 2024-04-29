@@ -31,10 +31,8 @@ export class LoginComponent {
       const password = this.loginForm.get('password')!.value;
       this.authService.login(username, password).subscribe({
         next: (data) => {
-            localStorage.setItem('token', data.token);
-            this.successMessage = `Login successful. Token: ${data.token}`; 
-            console.log(data.accessToken);
-           // this.router.navigate(['/dashboard']);
+            localStorage.setItem('token', data.accessToken);
+            this.router.navigate(['/dashboard']);
         },
         error: (error) => {
           if (error.status === 401) {

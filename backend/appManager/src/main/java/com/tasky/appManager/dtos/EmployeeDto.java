@@ -7,6 +7,7 @@ public class EmployeeDto {
 
         private Long employeeId;
         private String username;
+        private String name;
         private ManagerDto managerDto;
         private String bestQuality;
 }

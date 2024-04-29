@@ -18,6 +18,8 @@
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
 
+    import java.util.HashMap;
+    import java.util.Map;
     import java.util.Optional;
 
     @RestController
@@ -42,18 +44,29 @@
         }
 
         @PostMapping("/auth/logout")
+       /* public void logout(@RequestHeader(value="Authorization") String authHeader) {
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                System.out.println ("Logged out successfully - Debug mode");
+            }
+            System.out.println ("No Authorization header present");
+        }*/
+
         public ResponseEntity<?> logout(@RequestHeader(value="Authorization") String authHeader) {
             if (authHeader != null && authHeader.startsWith("Bearer ")) {
                 String token = authHeader.substring(7);
                 long remainingTime = calculateRemainingTime(token);
-                System.out.println(remainingTime);
+                System.out.println(authHeader);
                 if (remainingTime > 0) {
                     tokenStore.invalidateToken(token, remainingTime);
-                    return ResponseEntity.ok().body("Logged out successfully");
+                    Map<String, String> response = new HashMap<>();
+                    response.put("message", "logout success");
+                    return ResponseEntity.ok(response);
+
                 }
             }
             return ResponseEntity.badRequest().body("Invalid token or token already expired");
         }
+
         @PutMapping ("/auth/em/update-password")
         public ResponseEntity<?> updateEmployeePassword(@RequestHeader(value="Authorization") String authHeader, @RequestParam String newPassword) {
             String username = extractUsernameFromToken(authHeader);

@@ -1,0 +1,51 @@
+<!-- Admin Component Template -->
+<mat-toolbar color="primary" style="justify-content: space-between;">
+  <span>Tasky</span>
+  <div>
+    <span style="margin-right: 10px;font-size: 16px;">Hello, {{username}}</span>
+    <button mat-raised-button color="primary" (click)="openCreateManagerDialog()" style="margin-right: 10px;font-size: 16px;">Create Manager</button>
+    <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+  </div>
+</mat-toolbar>
+<br>
+<br>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="managers" class="mat-elevation-z8">
+    <!-- Columns Definitions -->
+    <ng-container matColumnDef="managerId">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let manager">{{ manager.managerId }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let manager">{{ manager.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>Username</th>
+      <td mat-cell *matCellDef="let manager">{{ manager.username }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let manager">
+        <button mat-button (click)="updateEmployee(manager)">Update</button>
+        <button mat-button color="warn" (click)="deleteManager(manager.managerId)">Delete</button>
+      </td>
+    </ng-container>
+
+    <!-- Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="['managerId', 'name', 'username', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['managerId', 'name', 'username', 'actions'];"></tr>
+  </table>
+</div>
+
+
+  
+
+
+
+
+
+

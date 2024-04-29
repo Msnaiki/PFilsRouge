@@ -67,6 +67,7 @@ public class EmployeeService {
         Long employeeId = employeeDto.getEmployeeId();
         Employee existingEmployee = employeeRepository.findById(employeeId)
                 .orElseThrow(() -> new IllegalArgumentException("Employee not found with ID: " + employeeId));
+        existingEmployee.setName(employeeDto.getName());
         existingEmployee.setBestQuality(employeeDto.getBestQuality());
 
         try {

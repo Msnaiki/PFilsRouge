@@ -1,0 +1,133 @@
+
+<header>
+  <mat-toolbar color="primary" style="display: 
+  flex;justify-content:space-between ;">
+    <span>Tasky</span>
+    <nav mat-tab-nav-bar>
+      <span style="margin-right: 10px;font-size: 16px;">Hello, {{username}}</span>
+      <button mat-raised-button color="primary" (click)="openPassUpdateDialog()">Change Password</button>
+      <button mat-raised-button color="primary" (click)="openCreateEmployeeDialog()">Create Employee</button>
+      <button mat-raised-button color="primary" (click)="openCreateTaskDialog()">Create Task</button>
+      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    </nav>
+  </mat-toolbar>
+</header>
+<br><br>
+<mat-tab-group mat-align-tabs="center"> 
+  <mat-tab label="employees"><br> 
+  
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      
+          <!-- Username Column -->
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+          </ng-container>
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>  
+          <!-- Best Quality Column -->
+          <ng-container matColumnDef="bestQuality">
+            <th mat-header-cell *matHeaderCellDef> Best Quality </th>
+            <td mat-cell *matCellDef="let element"> {{element.bestQuality}} </td>
+          </ng-container>
+      
+          <!-- Manager ID Column -->
+          <ng-container matColumnDef="managerId">
+            <th mat-header-cell *matHeaderCellDef> Manager </th>
+            <td mat-cell *matCellDef="let element"> {{ element.managerDto.name }} </td>
+          </ng-container>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button (click)="updateEmployee(element)" color="primary">
+                Update
+              </button>
+              <button mat-button (click)="deleteEmployee(element.employeeId)" color="warn">Delete</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <br></mat-tab> 
+  <mat-tab label="All tasks"><br><br>
+   
+  <div class="mat-elevation-z8">
+<table mat-table [dataSource]="taskSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let task">{{ task.title }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="description" maxlength="255">
+    <th mat-header-cell *matHeaderCellDef>Description</th>
+    <td mat-cell *matCellDef="let task">{{ task.description | slice:0:80}}{{ task.description.length > 80 ? '...' : '' }}</td>
+  </ng-container>
+  <ng-container matColumnDef="assignedBy">
+  <th mat-header-cell *matHeaderCellDef>Assigned By</th>
+  <td mat-cell *matCellDef="let task">{{ task.assignedBy }}</td>
+</ng-container>
+
+<ng-container matColumnDef="assignedTo">
+  <th mat-header-cell *matHeaderCellDef>Assigned To</th>
+  <td mat-cell *matCellDef="let task">{{ task.assignedTo }}</td>
+</ng-container>
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef>Status</th>
+    <td mat-cell *matCellDef="let task">{{ task.status }}</td>
+  </ng-container>
+  
+  
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Actions</th>
+    <td mat-cell *matCellDef="let task">
+      <button mat-button (click)="openUpdateTaskDialog(task)" color="primary">Update</button>
+      <button mat-button (click)="deleteTask(task.taskId)" color="warn">Delete</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="taskColumns"></tr>
+  <tr mat-row *matRowDef="let task; columns: taskColumns;"></tr>
+</table>
+</div> <br></mat-tab> 
+<mat-tab label="My tasks"><br><br>
+  
+<div class="mat-elevation-z8">
+<table mat-table [dataSource]="myTaskSource" class="mat-elevation-z8">
+<ng-container matColumnDef="title">
+  <th mat-header-cell *matHeaderCellDef>Title</th>
+  <td mat-cell *matCellDef="let task">{{ task.title }}</td>
+</ng-container>
+
+<ng-container matColumnDef="description" maxlength="255">
+  <th mat-header-cell *matHeaderCellDef>Description</th>
+  <td mat-cell *matCellDef="let task">{{ task.description | slice:0:80}}{{ task.description.length > 80 ? '...' : '' }}</td>
+</ng-container>
+
+<ng-container matColumnDef="status">
+  <th mat-header-cell *matHeaderCellDef>Status</th>
+  <td mat-cell *matCellDef="let task">{{ task.status }}</td>
+</ng-container>
+
+<ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef>Actions</th>
+  <td mat-cell *matCellDef="let task">
+    <button mat-button (click)="openUpdateTaskDialog(task)" color="primary">Update</button>
+    <button mat-button (click)="deleteTask(task.taskId)" color="warn">Delete</button>
+  </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="taskColumns"></tr>
+<tr mat-row *matRowDef="let task; columns: taskColumns;"></tr>
+</table>
+</div> <br></mat-tab>
+</mat-tab-group> 
+
+
+  

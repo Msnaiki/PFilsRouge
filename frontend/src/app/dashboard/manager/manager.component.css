@@ -1,0 +1,6 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+/* CSS to align button to the right */
+.right-align {
+    display: flex;
+    justify-content: flex-end;
+}

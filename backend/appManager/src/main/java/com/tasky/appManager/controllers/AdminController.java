@@ -56,6 +56,7 @@ public class AdminController {
     // Update manager
     @PutMapping("/updateManager")
     public ResponseEntity<Object> updateManager(@RequestBody Manager manager) {
+        System.out.println(manager);
         try {
             ManagerDto updatedManager = managerService.updateManager(manager);
             return ResponseEntity.ok(updatedManager);

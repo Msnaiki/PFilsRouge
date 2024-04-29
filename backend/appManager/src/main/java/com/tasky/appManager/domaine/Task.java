@@ -10,6 +10,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long taskId;
     private String title;
+    @Column(columnDefinition = "TEXT")
     private String description;
     @JsonBackReference
     @ManyToOne

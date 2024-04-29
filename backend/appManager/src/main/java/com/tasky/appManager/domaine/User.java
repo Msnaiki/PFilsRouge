@@ -13,5 +13,6 @@ import lombok.NoArgsConstructor;
 public class User {
     @Column(unique = true)
     private String username;
+    private String name;
     private String password;
 }

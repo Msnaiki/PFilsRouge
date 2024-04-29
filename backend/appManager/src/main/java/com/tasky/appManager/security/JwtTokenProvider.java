@@ -30,13 +30,23 @@ public class JwtTokenProvider {
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
         // Determine the user's role
         String role = getUserRole(user);
+        Long userId = getUserId(user);
 
         return JWT.create()
                 .withSubject(user.getUsername())
+                .withClaim("userId", userId)
                 .withClaim("role",role)
                 .withIssuedAt(now)
                 .withExpiresAt(expiryDate)
                 .sign(Algorithm.HMAC512(jwtSecret));
+    }
+    private Long getUserId(User user) {
+        if (user instanceof Employee) {
+            return ((Employee) user).getEmployeeId();
+        } else if (user instanceof Manager) {
+            return ((Manager) user).getManagerId();
+        }
+        return null; // Default or in case it's not a managed entity
     }
 
     private String getUserRole(User user) {
